@@ -3,28 +3,21 @@
 #include <windowsx.h>
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <string.h>
 using namespace std;
 
-typedef struct
-{
-	int R;
-	int G;
-	int B;
-} color;
+
 
 class Rhomb
 {
 	POINT *points; //вершины
-	color outline; //цвет контура
-	color filling; //цвет заливки
 
 public:
 	Rhomb();
+	Rhomb(int, int, int, int);
 	~Rhomb();
+	friend class Draw;
 	void saveToFile(char*);
 	void readFromFile(char*);
-	void drawRhomb(HDC);
-	void drawFilledRhomb(HDC);
 };
 

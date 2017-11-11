@@ -142,9 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Draw.h" />
     <ClInclude Include="Rhomb.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Draw.cpp" />
     <ClCompile Include="example.cpp" />
     <ClCompile Include="Rhomb.cpp" />
   </ItemGroup>
