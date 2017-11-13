@@ -25,7 +25,7 @@ int main()
 		c.drawRhombInRhomb(&a, &b);
 		c.setFillerColor(100, 100, 100);
 		c.setOutlineColor(0, 255, 0);
-		c.moveRhomb(&a);
+		a.shiftRhomb(-10, 50);
 		
 		c.drawRhomb(&a);
 		c.drawFilledRhomb(&a);

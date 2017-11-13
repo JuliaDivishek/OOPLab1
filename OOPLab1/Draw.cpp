@@ -31,6 +31,7 @@ Draw::~Draw()
 
 void Draw::drawRhomb(Rhomb *rhomb)
 {
+	checkOutTheWindow(rhomb);
 	clearTheScreen(this->hwnd);
 	SelectPen(this->hdc, this->hNewPen);
 	SelectBrush(hdc, GetStockBrush(NULL_BRUSH));
@@ -41,6 +42,7 @@ void Draw::drawRhomb(Rhomb *rhomb)
 
 void Draw::drawFilledRhomb(Rhomb *rhomb)
 {
+	checkOutTheWindow(rhomb);
 	clearTheScreen(this->hwnd);
 	SelectPen(this->hdc, this->hNewPen);
 	SelectBrush(this->hdc, this->hNewBrush);
@@ -51,6 +53,8 @@ void Draw::drawFilledRhomb(Rhomb *rhomb)
 
 void Draw::drawRhombInRhomb(Rhomb* outerRhomb, Rhomb* innerRhomb)
 {
+	checkOutTheWindow(outerRhomb);
+	checkOutTheWindow(innerRhomb);
 	clearTheScreen(this->hwnd);
 	outerRhomb->isRhombInside(innerRhomb);
 	SelectPen(this->hdc, this->hNewPen);
@@ -63,27 +67,6 @@ void Draw::drawRhombInRhomb(Rhomb* outerRhomb, Rhomb* innerRhomb)
 	SelectBrush(this->hdc, this->hNewBrush);
 	//делаем заливку, указываем точку, гарантированно лежащую внутри фигуры
 	FloodFill(this->hdc, points1[0].x + 1, points1[0].y, RGB(this->outline.R, this->outline.G, this->outline.B));
-	system("pause");
-}
-
-
-void Draw::moveRhomb(Rhomb *rhomb)
-{
-	clearTheScreen(this->hwnd);
-	RECT rt = getWindowSize(this->hwnd);
-	//ромб перемещается вправо, пока не достигнет границы окна
-	SelectPen(this->hdc, this->hNewPen);
-	SelectBrush(this->hdc, this->hNewBrush);
-	POINT *points = rhomb->getPoints();
-	while (points[2].x < rt.right)
-	{
-		Polygon(this->hdc, points, 4);
-		Sleep(100); //задержка в милисекундах
-		clearTheScreen(this->hwnd);
-		rhomb->setPoints(points[0].x + 5, points[0].y, points[1].x + 5, points[1].y);
-		Polygon(this->hdc, points, 4);
-		points = rhomb->getPoints();
-	}
 	system("pause");
 }
 
@@ -143,4 +126,12 @@ void Draw::setFillerColor(short R, short G, short B)
 	checkColor(R, G, B);
 	filler = { R, G, B };
 	hNewBrush = CreateSolidBrush(RGB(R, G, B));
+}
+
+void Draw::checkOutTheWindow(Rhomb* rhomb)
+{
+	RECT rt = getWindowSize(this->hwnd);
+	POINT *points = rhomb->getPoints();
+	if((points[0].x < rt.left) || (points[2].x > rt.right) || (points[1].y < rt.top) || (points[3].y > rt.bottom))
+		throw exception("Figure is off-screen");
 }

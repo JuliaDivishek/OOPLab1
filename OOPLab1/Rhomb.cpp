@@ -92,3 +92,8 @@ POINT* Rhomb::getPoints()
 {
 	return this->points;
 }
+
+void Rhomb::shiftRhomb(int x, int y) {
+	POINT *points = this->getPoints();
+	setPoints(points[0].x + x, points[0].y + y, points[1].x + x, points[1].y + y);
+}

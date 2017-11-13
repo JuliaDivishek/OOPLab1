@@ -1,4 +1,4 @@
-#include "DrawHelpers.h"
+#include <windows.h>
 
 void clearTheScreen(HWND hwnd)
 {

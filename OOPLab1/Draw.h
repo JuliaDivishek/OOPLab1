@@ -20,6 +20,7 @@ class Draw
 	HBRUSH hNewBrush; //кисть
 
 	void checkColor(short, short, short);
+	void checkOutTheWindow(Rhomb*);
 
 public:
 	Draw();
@@ -28,10 +29,10 @@ public:
 	void drawRhomb(Rhomb*);
 	void drawFilledRhomb(Rhomb*);
 	void drawRhombInRhomb(Rhomb*, Rhomb*);
-	void moveRhomb(Rhomb*);
 	void saveColorsToFile(string);
 	void readColorsFromFile(string);
 	void setOutlineColor(short, short, short);
 	void setFillerColor(short, short, short);
+	
 };
 
