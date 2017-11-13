@@ -11,7 +11,7 @@ int main()
 
 		Rhomb a(50, 50, 100, 20);
 		Rhomb b(55, 50, 100, 35);
-
+		
 
 		color outlineColor = { 255, 0, 0 };
 		color fillerColor = { 200, 100, 0 };
@@ -23,14 +23,12 @@ int main()
 		c.drawRhomb(&a);
 		
 		c.drawRhombInRhomb(&a, &b);
-		c.setFillerColor(100, 100, 300);
+		c.setFillerColor(100, 100, 100);
 		c.setOutlineColor(0, 255, 0);
 		c.moveRhomb(&a);
 		
 		c.drawRhomb(&a);
 		c.drawFilledRhomb(&a);
-	
-		ReleaseDC(hwnd, hdc);
 	}
 	catch (exception ex)
 	{

@@ -1,5 +1,5 @@
 #include "Draw.h"
-#include "helper.h"
+#include "DrawHelpers.h"
 
 
 Draw::Draw()
@@ -22,11 +22,11 @@ Draw::Draw(HWND hwnd, HDC hdc, color *outlineColor, color *fillerColor)
 	checkColor(this->filler.R, this->filler.G, this->filler.B);
 	hNewPen = CreatePen(PS_SOLID, 1, RGB(this->outline.R, this->outline.G, this->outline.B));
 	hNewBrush = CreateSolidBrush(RGB(this->filler.R, this->filler.G, this->filler.B));
-
 }
 
 Draw::~Draw()
 {
+	ReleaseDC(this->hwnd, this->hdc);
 }
 
 void Draw::drawRhomb(Rhomb *rhomb)
@@ -34,7 +34,8 @@ void Draw::drawRhomb(Rhomb *rhomb)
 	clearTheScreen(this->hwnd);
 	SelectPen(this->hdc, this->hNewPen);
 	SelectBrush(hdc, GetStockBrush(NULL_BRUSH));
-	Polygon(hdc, rhomb->points, 4);
+	POINT *points = rhomb->getPoints();
+	Polygon(hdc, points, 4);
 	system("pause");
 }
 
@@ -43,7 +44,8 @@ void Draw::drawFilledRhomb(Rhomb *rhomb)
 	clearTheScreen(this->hwnd);
 	SelectPen(this->hdc, this->hNewPen);
 	SelectBrush(this->hdc, this->hNewBrush);
-	Polygon(this->hdc, rhomb->points, 4);
+	POINT *points = rhomb->getPoints();
+	Polygon(this->hdc, points, 4);
 	system("pause");
 }
 
@@ -53,12 +55,14 @@ void Draw::drawRhombInRhomb(Rhomb* outerRhomb, Rhomb* innerRhomb)
 	outerRhomb->isRhombInside(innerRhomb);
 	SelectPen(this->hdc, this->hNewPen);
 	SelectBrush(this->hdc, GetStockBrush(NULL_BRUSH));
-	Polygon(this->hdc, outerRhomb->points, 4);
-	Polygon(this->hdc, innerRhomb->points, 4);
+	POINT *points1 = outerRhomb->getPoints();
+	POINT *points2 = innerRhomb->getPoints();
+	Polygon(this->hdc, points1, 4);
+	Polygon(this->hdc, points2, 4);
 	//Меняем цвет кисти
 	SelectBrush(this->hdc, this->hNewBrush);
 	//делаем заливку, указываем точку, гарантированно лежащую внутри фигуры
-	FloodFill(this->hdc, outerRhomb->points[0].x + 1, outerRhomb->points[0].y, RGB(this->outline.R, this->outline.G, this->outline.B));
+	FloodFill(this->hdc, points1[0].x + 1, points1[0].y, RGB(this->outline.R, this->outline.G, this->outline.B));
 	system("pause");
 }
 
@@ -70,16 +74,17 @@ void Draw::moveRhomb(Rhomb *rhomb)
 	//ромб перемещается вправо, пока не достигнет границы окна
 	SelectPen(this->hdc, this->hNewPen);
 	SelectBrush(this->hdc, this->hNewBrush);
-	while(rhomb->points[2].x < rt.right)
+	POINT *points = rhomb->getPoints();
+	while (points[2].x < rt.right)
 	{
-		Polygon(this->hdc, rhomb->points, 4);
+		Polygon(this->hdc, points, 4);
 		Sleep(100); //задержка в милисекундах
 		clearTheScreen(this->hwnd);
-		rhomb->setPoints(rhomb->points[0].x + 5, rhomb->points[0].y, rhomb->points[1].x + 5, rhomb->points[1].y);
-		Polygon(this->hdc, rhomb->points, 4);
+		rhomb->setPoints(points[0].x + 5, points[0].y, points[1].x + 5, points[1].y);
+		Polygon(this->hdc, points, 4);
+		points = rhomb->getPoints();
 	}
 	system("pause");
-	
 }
 
 
@@ -131,11 +136,11 @@ void Draw::setOutlineColor(short R, short G, short B)
 {
 	checkColor(R, G, B);
 	this->outline = { R, G, B };
-	hNewPen = CreatePen(PS_SOLID, 1, RGB(this->outline.R, this->outline.G, this->outline.B));
+	hNewPen = CreatePen(PS_SOLID, 1, RGB(R, G, B));
 }
 void Draw::setFillerColor(short R, short G, short B)
 {
 	checkColor(R, G, B);
 	filler = { R, G, B };
-	hNewBrush = CreateSolidBrush(RGB(this->filler.R, this->filler.G, this->filler.B));
+	hNewBrush = CreateSolidBrush(RGB(R, G, B));
 }

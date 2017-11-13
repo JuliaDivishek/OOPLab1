@@ -18,10 +18,10 @@ public:
 	Rhomb();
 	Rhomb(int, int, int, int);
 	~Rhomb();
-	friend class Draw;
 	void saveToFile(string);
 	void readFromFile(string);
 	void setPoints(int, int, int, int);
 	void isRhombInside(Rhomb*);
+	POINT* getPoints();
 };
 
