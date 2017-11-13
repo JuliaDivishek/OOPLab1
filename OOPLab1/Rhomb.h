@@ -12,12 +12,16 @@ class Rhomb
 {
 	POINT *points; //вершины
 
+	void checkPoints(int, int, int, int);
+
 public:
 	Rhomb();
 	Rhomb(int, int, int, int);
 	~Rhomb();
 	friend class Draw;
-	void saveToFile(char*);
-	void readFromFile(char*);
+	void saveToFile(string);
+	void readFromFile(string);
+	void setPoints(int, int, int, int);
+	void isRhombInside(Rhomb*);
 };
 

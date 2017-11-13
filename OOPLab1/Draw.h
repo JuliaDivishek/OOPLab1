@@ -6,23 +6,32 @@
 #include <string.h>
 #include "Color.h"
 #include "Rhomb.h"
+
+
 using namespace std;
 
 class Draw
 {
+	HWND hwnd;
+	HDC hdc;
 	color outline; //цвет контура
 	color filler; //цвет заливки
 	HPEN hNewPen; //перо
 	HBRUSH hNewBrush; //кисть
+
+	void checkColor(short, short, short);
+
 public:
 	Draw();
-	Draw(color*, color*);
+	Draw(HWND, HDC, color*, color*);
 	~Draw();
-	void drawRhomb(HDC, Rhomb*);
-	void drawFilledRhomb(HDC, Rhomb*);
-	void setPen(int, int, int);
-	void setBrush(int, int, int);
-	void setDefaultPen();
-	void setDefaultBrush();
+	void drawRhomb(Rhomb*);
+	void drawFilledRhomb(Rhomb*);
+	void drawRhombInRhomb(Rhomb*, Rhomb*);
+	void moveRhomb(Rhomb*);
+	void saveColorsToFile(string);
+	void readColorsFromFile(string);
+	void setOutlineColor(short, short, short);
+	void setFillerColor(short, short, short);
 };
 

@@ -1,49 +1,40 @@
 #include "Rhomb.h"
 #include "Draw.h"
 
-void clearTheScreen(HWND hwnd)
-{
-	InvalidateRect(hwnd, 0, TRUE);
-	UpdateWindow(hwnd);
-}
+
 
 int main()
 {
+	try {
+		HWND hwnd = GetConsoleWindow();
+		HDC hdc = GetDC(hwnd);
+
+		Rhomb a(50, 50, 100, 20);
+		Rhomb b(55, 50, 100, 35);
+
+
+		color outlineColor = { 255, 0, 0 };
+		color fillerColor = { 200, 100, 0 };
+		Draw c(hwnd, hdc, &outlineColor, &fillerColor);
+		c.readColorsFromFile("colors.txt");
+
+		
+		c.drawFilledRhomb(&a);
+		c.drawRhomb(&a);
+		
+		c.drawRhombInRhomb(&a, &b);
+		c.setFillerColor(100, 100, 300);
+		c.setOutlineColor(0, 255, 0);
+		c.moveRhomb(&a);
+		
+		c.drawRhomb(&a);
+		c.drawFilledRhomb(&a);
 	
-	HWND hwnd = GetConsoleWindow();
-	HDC hdc = GetDC(hwnd);
-
-	Rhomb a(90, 200, 200, 50);
-	//a.readFromFile("rhomb.txt");
-	//a.drawFilledRhomb(hdc);
-	
-	
-	Rhomb b;
-	b.readFromFile("rhomb.txt");
-
-	color outlineColor = { 125, 125, 125 };
-	color fillerColor = { 200, 100, 0 };
-	Draw c(&outlineColor, &fillerColor);
-	c.drawFilledRhomb(hdc, &a);
-
-	clearTheScreen(hwnd);
-
-	c.drawRhomb(hdc, &b);
-	
-
-	clearTheScreen(hwnd);
-
-
-	c.setPen(0, 255, 0);
-	c.setBrush(255, 0, 0);
-	c.drawFilledRhomb(hdc, &a);
-	
-	clearTheScreen(hwnd);
-
-	c.drawRhomb(hdc, &a);
-
-	
-	//a.saveToFile("rhomb.txt");
-	ReleaseDC(hwnd, hdc);
+		ReleaseDC(hwnd, hdc);
+	}
+	catch (exception ex)
+	{
+		cerr << ex.what() << endl;
+	}
 	return 0;
 }

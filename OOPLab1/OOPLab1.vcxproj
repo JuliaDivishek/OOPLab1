@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Color.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="helper.h" />
     <ClInclude Include="Rhomb.h" />
   </ItemGroup>
   <ItemGroup>
