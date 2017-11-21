@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <windows.h>
 #include <windowsx.h>
 #include <iostream>
@@ -9,9 +9,9 @@
 
 class Queue
 {
-	int maxSize_; //размер очереди
-	int rear; //индекс конца очереди
-	Rhomb **array; //массив указателей на экземпляры класса ромб
+	int maxSize_; //СЂР°Р·РјРµСЂ РѕС‡РµСЂРµРґРё
+	int rear; //РёРЅРґРµРєСЃ РєРѕРЅС†Р° РѕС‡РµСЂРµРґРё
+	Rhomb **array; //РјР°СЃСЃРёРІ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° СЌРєР·РµРјРїР»СЏСЂС‹ РєР»Р°СЃСЃР° СЂРѕРјР±
 
 public:
 	Queue(int);

@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <windows.h>
 #include <windowsx.h>
 #include <iostream>
@@ -8,7 +8,7 @@
 
 class Rhomb
 {
-	POINT *points; //вершины
+	POINT *points; //РІРµСЂС€РёРЅС‹
 
 	void checkPoints(int, int, int, int);
 	

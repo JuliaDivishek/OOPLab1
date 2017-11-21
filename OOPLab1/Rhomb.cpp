@@ -1,4 +1,4 @@
-#include "Rhomb.h"
+п»ї#include "Rhomb.h"
 
 Rhomb::Rhomb()
 {
@@ -27,7 +27,7 @@ Rhomb::Rhomb(int x1, int y1, int x2, int y2)
 
 void Rhomb::saveToFile(std::ofstream& out)
 {
-	 //достаточно сохранить две вершины, левую и верхнюю
+	 //РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РґРІРµ РІРµСЂС€РёРЅС‹, Р»РµРІСѓСЋ Рё РІРµСЂС…РЅСЋСЋ
 	out << this->points[0].x;
 	out << " ";
 	out << this->points[0].y;
@@ -42,13 +42,13 @@ void Rhomb::readFromFile(std::ifstream& in)
 {
 	if (in.is_open())
 	{
-	   //Считываем координаты двух точек
+	   //РЎС‡РёС‚С‹РІР°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РґРІСѓС… С‚РѕС‡РµРє
 		in >> points[0].x;
 		in >> points[0].y;
 		in >> points[1].x;
 		in >> points[1].y;
 		checkPoints(points[0].x, points[0].y, points[1].x, points[1].y);
-		//Остальные две высчитываем
+		//РћСЃС‚Р°Р»СЊРЅС‹Рµ РґРІРµ РІС‹СЃС‡РёС‚С‹РІР°РµРј
 		points[2] = { points[1].x + (points[1].x - points[0].x), points[0].y };
 		points[3] = { points[1].x, points[0].y * 2 - points[1].y };
 	}
@@ -76,7 +76,7 @@ void Rhomb::isRhombInside(Rhomb *innerRhomb)
 {
 	POINT *points1 = this->getPoints();
 	POINT *points2 = innerRhomb->getPoints();
-	//при проверке используется запас в 5 пикселей, чтобы при отрисовке фигура внутри фигуры смотрелась красиво
+	//РїСЂРё РїСЂРѕРІРµСЂРєРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Р·Р°РїР°СЃ РІ 5 РїРёРєСЃРµР»РµР№, С‡С‚РѕР±С‹ РїСЂРё РѕС‚СЂРёСЃРѕРІРєРµ С„РёРіСѓСЂР° РІРЅСѓС‚СЂРё С„РёРіСѓСЂС‹ СЃРјРѕС‚СЂРµР»Р°СЃСЊ РєСЂР°СЃРёРІРѕ
 	if((points2[0].x < points1[0].x + 5)||(points2[2].x > points1[2].x - 5)|| (points2[1].y < points1[1].y + 5)|| (points2[3].y > points1[3].y - 5))
 		throw std::exception("Incorrect points of innerRhomb");
 }

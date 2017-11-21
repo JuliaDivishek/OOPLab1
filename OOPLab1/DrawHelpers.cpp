@@ -1,4 +1,4 @@
-#include <windows.h>
+﻿#include <windows.h>
 
 void clearTheScreen(HWND hwnd)
 {

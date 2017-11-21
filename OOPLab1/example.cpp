@@ -1,4 +1,4 @@
-#include "Rhomb.h"
+п»ї#include "Rhomb.h"
 #include "Draw.h"
 #include "Queue.h"
 #include "DrawHelpers.h"
@@ -40,7 +40,7 @@ int main()
 		clearTheScreen(hwnd);
 
 
-		//Для второй лабораторной
+		//Р”Р»СЏ РІС‚РѕСЂРѕР№ Р»Р°Р±РѕСЂР°С‚РѕСЂРЅРѕР№
 		const int n = 5;
 		Queue queue(n);
 

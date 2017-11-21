@@ -1,4 +1,4 @@
-#include "Draw.h"
+п»ї#include "Draw.h"
 #include "DrawHelpers.h"
 
 
@@ -55,9 +55,9 @@ void Draw::drawRhombInRhomb(Rhomb* outerRhomb, Rhomb* innerRhomb)
 	SelectBrush(this->hdc, GetStockBrush(NULL_BRUSH));
 	Polygon(this->hdc, outerRhomb->points, 4);
 	Polygon(this->hdc, innerRhomb->points, 4);
-	//Меняем цвет кисти
+	//РњРµРЅСЏРµРј С†РІРµС‚ РєРёСЃС‚Рё
 	SelectBrush(this->hdc, this->hNewBrush);
-	//делаем заливку, указываем точку, гарантированно лежащую внутри фигуры
+	//РґРµР»Р°РµРј Р·Р°Р»РёРІРєСѓ, СѓРєР°Р·С‹РІР°РµРј С‚РѕС‡РєСѓ, РіР°СЂР°РЅС‚РёСЂРѕРІР°РЅРЅРѕ Р»РµР¶Р°С‰СѓСЋ РІРЅСѓС‚СЂРё С„РёРіСѓСЂС‹
 	FloodFill(this->hdc, outerRhomb->points[0].x + 1, outerRhomb->points[0].y, RGB(this->outline.R, this->outline.G, this->outline.B));
 }
 
@@ -70,7 +70,7 @@ void Draw::checkColor(short R, short G, short B)
 
 void Draw::saveColorsToFile(std::ofstream& out)
 {
-	//Сохраняем цвета контура и заливки
+	//РЎРѕС…СЂР°РЅСЏРµРј С†РІРµС‚Р° РєРѕРЅС‚СѓСЂР° Рё Р·Р°Р»РёРІРєРё
 	out << this->outline.R;
 	out << " ";
 	out << this->outline.G;
@@ -87,7 +87,7 @@ void Draw::readColorsFromFile(std::ifstream& in)
 {
 	if (in.is_open())
 	{
-		//Считываем цвета контура и заливки
+		//РЎС‡РёС‚С‹РІР°РµРј С†РІРµС‚Р° РєРѕРЅС‚СѓСЂР° Рё Р·Р°Р»РёРІРєРё
 		in >> this->outline.R;
 		in >> this->outline.G;
 		in >> this->outline.B;

@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <windows.h>
 #include <windowsx.h>
 #include <iostream>
@@ -12,10 +12,10 @@ class Draw
 {
 	HWND hwnd;
 	HDC hdc;
-	color outline; //цвет контура
-	color filler; //цвет заливки
-	HPEN hNewPen; //перо
-	HBRUSH hNewBrush; //кисть
+	color outline; //С†РІРµС‚ РєРѕРЅС‚СѓСЂР°
+	color filler; //С†РІРµС‚ Р·Р°Р»РёРІРєРё
+	HPEN hNewPen; //РїРµСЂРѕ
+	HBRUSH hNewBrush; //РєРёСЃС‚СЊ
 
 	void checkColor(short, short, short);
 	void checkOutTheWindow(Rhomb*);
