@@ -121,21 +121,21 @@ void Queue::setMaxSize(int maxSize)
 	array = new Rhomb*[maxSize];
 }
 
-void operator << (ofstream& out, Queue& queue)
+void Queue::operator << (ofstream& out)
 {
 	if (out.is_open())
 	{
-		out << queue.maxSize_ << " ";
-		out << queue.rear << " ";
-		for (int i = 0; i <= queue.rear; i++)
+		out << this->maxSize_ << " ";
+		out << this->rear << " ";
+		for (int i = 0; i <= this->rear; i++)
 		{
-			out << queue.array[i]->points[0].x;
+			out << this->array[i]->points[0].x;
 			out << " ";
-			out << queue.array[i]->points[0].y;
+			out << this->array[i]->points[0].y;
 			out << " ";
-			out << queue.array[i]->points[1].x;
+			out << this->array[i]->points[1].x;
 			out << " ";
-			out << queue.array[i]->points[1].y;
+			out << this->array[i]->points[1].y;
 			out << " ";
 		}
 	}

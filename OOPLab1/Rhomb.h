@@ -23,6 +23,5 @@ public:
 	void shiftRhomb(int, int);
 	POINT* getPoints();
 	friend class Queue;
-	friend void operator <<(ofstream&, Queue&);
 };
 

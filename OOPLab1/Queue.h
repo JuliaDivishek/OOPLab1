@@ -23,7 +23,7 @@ public:
 	void saveQueueToFile(ofstream&);
 	void loadQueueFromFile(ifstream&);
 	void setMaxSize(int);
-	friend void operator <<(ofstream&, Queue&); //Перегрузка оператора cout 
-	friend void operator >> (istream&, Queue&); //Перегрузка оператора cin
+	void operator <<(ofstream&); //Перегрузка оператора cout 
+	void operator >> (istream&); //Перегрузка оператора cin
 };
 
