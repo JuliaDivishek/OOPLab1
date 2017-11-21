@@ -1,7 +1,5 @@
 ﻿#include "Queue.h"
 
-
-
 Queue::Queue(int maxSize)
 {
 	maxSize_ = maxSize;
@@ -18,7 +16,7 @@ Queue::~Queue()
 void Queue::enqueue(Rhomb *rhomb)
 {
 	if (rear == maxSize_ - 1)
-		throw exception("Queue is overflow");
+		throw std::exception("Queue is overflow");
 
 	array[++rear] = rhomb;
 }
@@ -26,7 +24,7 @@ void Queue::enqueue(Rhomb *rhomb)
 Rhomb* Queue::dequeue()
 {
 	if (rear==-1)
-		throw exception("Queue is empty");
+		throw std::exception("Queue is empty");
 	
 	Rhomb *a = array[0]; //взяли из очереди элемент
 	
@@ -46,11 +44,11 @@ Rhomb* Queue::dequeue()
 void Queue::showQueue()
 {
 	if (rear == -1)
-		throw exception("Queue is empty");
+		throw std::exception("Queue is empty");
 
 	for (int i = 0; i <= rear; i++)
 	{
-		cout << i<<". ("<<array[i]->points[0].x<<"; "<<array[i]->points[0].y<<") ("<<array[i]->points[1].x<<"; "<<array[i]->points[1].y<<")" << endl;
+		std::cout << i<<". ("<<array[i]->points[0].x<<"; "<<array[i]->points[0].y<<") ("<<array[i]->points[1].x<<"; "<<array[i]->points[1].y<<")" << std::endl;
 	}
 }
 
@@ -65,15 +63,73 @@ const Rhomb* Queue::find(int x1, int y1, int x2, int y2)
 	return a;
 }
 
-void Queue::saveQueueToFile(ofstream& out)
-{
-	out << this;
 
-	/*if (out.is_open())
+void Queue::setMaxSize(int maxSize)
+{
+	maxSize_ = maxSize;
+	rear = -1;
+	delete[] array;
+	array = new Rhomb*[maxSize];
+}
+
+
+
+std::ofstream& operator<<(std::ofstream& out, const Queue& queue)
+{
+	if (out.is_open())
 	{
-		out << maxSize_ << " ";
-		out << rear << " ";
-		for (int i = 0; i <= rear; i++)
+		out << queue.maxSize_ << " ";
+		out << queue.rear << " ";
+		for (int i = 0; i <= queue.rear; i++)
+		{
+			out << queue.array[i]->points[0].x;
+			out << " ";
+			out << queue.array[i]->points[0].y;
+			out << " ";
+			out << queue.array[i]->points[1].x;
+			out << " ";
+			out << queue.array[i]->points[1].y;
+			out << " ";
+		}
+		return out;
+	}
+	else std::exception("The stream is not open");
+}
+
+std::ifstream& operator >> (std::ifstream& in, Queue& queue)
+{
+	if (in.is_open())
+		{
+			int frear, fMaxSize;
+			in >> fMaxSize;
+			in >> frear;
+			queue.setMaxSize(fMaxSize);
+					
+			for (int i = 0; i <= frear; i++)
+			{
+				int x1, y1, x2, y2;
+				in >> x1;
+				in >> y1;
+				in >> x2;
+				in >> y2;
+				Rhomb* rhomb = new Rhomb(x1, y1, x2, y2);
+				queue.enqueue(rhomb);
+				}
+			return in;
+			}
+	else std::exception("The stream is not open");
+
+}
+
+
+//Вот так получается, но писать тогда нужно наоборот queue<<out
+/*ofstream& Queue::operator<<(ofstream& out)
+{
+	if (out.is_open())
+	{
+		out << this->maxSize_ << " ";
+		out << this->rear << " ";
+		for (int i = 0; i <= this->rear; i++)
 		{
 			out << array[i]->points[0].x;
 			out << " ";
@@ -84,60 +140,7 @@ void Queue::saveQueueToFile(ofstream& out)
 			out << array[i]->points[1].y;
 			out << " ";
 		}
-	}
-	else exception("The stream is not open");*/
-}
-
-void Queue::loadQueueFromFile(ifstream& in)
-{
-	
-	if (in.is_open())
-	{
-		int frear, fMaxSize;
-		in >> fMaxSize;
-		in >> frear;
-		setMaxSize(fMaxSize);
-			
-		for (int i = 0; i <= frear; i++)
-		{
-			int x1, y1, x2, y2;
-			in >> x1;
-			in >> y1;
-			in >> x2;
-			in >> y2;
-			Rhomb* rhomb = new Rhomb(x1, y1, x2, y2);
-			enqueue(rhomb);
-		}
-	
+		return out;
 	}
 	else exception("The stream is not open");
-}
-
-void Queue::setMaxSize(int maxSize)
-{
-	maxSize_ = maxSize;
-	rear = -1;
-	delete[] array;
-	array = new Rhomb*[maxSize];
-}
-
-void Queue::operator << (ofstream& out)
-{
-	if (out.is_open())
-	{
-		out << this->maxSize_ << " ";
-		out << this->rear << " ";
-		for (int i = 0; i <= this->rear; i++)
-		{
-			out << this->array[i]->points[0].x;
-			out << " ";
-			out << this->array[i]->points[0].y;
-			out << " ";
-			out << this->array[i]->points[1].x;
-			out << " ";
-			out << this->array[i]->points[1].y;
-			out << " ";
-		}
-	}
-	else exception("The stream is not open");
-}
+}*/

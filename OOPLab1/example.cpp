@@ -1,6 +1,7 @@
 #include "Rhomb.h"
 #include "Draw.h"
 #include "Queue.h"
+#include "DrawHelpers.h"
 
 
 int main()
@@ -16,20 +17,30 @@ int main()
 		color outlineColor = { 255, 0, 0 };
 		color fillerColor = { 200, 100, 0 };
 		Draw c(hwnd, hdc, &outlineColor, &fillerColor);
-		c.readColorsFromFile("colors.txt");
+		
 
+		std::ifstream in("colors.txt", std::ios::in);
+		c.readColorsFromFile(in);
+		in.close();
 		
 		c.drawFilledRhomb(&a);
+		clearTheScreen(hwnd);
 		c.drawRhomb(&a);
-		
+		clearTheScreen(hwnd);
+
 		c.drawRhombInRhomb(&a, &b);
+		clearTheScreen(hwnd);
 		c.setFillerColor(100, 100, 100);
 		c.setOutlineColor(0, 255, 0);
 		a.shiftRhomb(-10, 50);
 		
 		c.drawRhomb(&a);
+		clearTheScreen(hwnd);
 		c.drawFilledRhomb(&a);
+		clearTheScreen(hwnd);
 
+
+		//Для второй лабораторной
 		const int n = 5;
 		Queue queue(n);
 
@@ -38,23 +49,24 @@ int main()
 			Rhomb* rhomb = new Rhomb(50+i, 50+i, 100+i, 20+i);
 			queue.enqueue(rhomb);
 		}
-		queue.showQueue();
-		//Rhomb *d = queue.dequeue();
-		//queue.showQueue();
-		//cout << queue.find(51, 51, 101, 21) << endl;
 
-		ofstream out("queue.txt", ios::out);
-		queue.saveQueueToFile(out);
-		out.close();
+		std::ofstream queueOut("queue.txt", std::ios::out);
+		//out<<queue;
+		queueOut.close();
 
-		/*ifstream in("queue.txt", ios::in);
-		queue.loadQueueFromFile(in);
+		Rhomb *d = queue.dequeue();
 		queue.showQueue();
-		in.close();*/
+		std::cout << queue.find(51, 51, 101, 21) << std::endl;
+
+	
+		std::ifstream queueIn("queue.txt", std::ios::in);
+		//queueIn >> queue;
+		queue.showQueue();
+		queueIn.close();
 	}
-	catch (exception ex)
+	catch (std::exception ex)
 	{
-		cerr << ex.what() << endl;
+		std::cerr << ex.what() << std::endl;
 	}
 	return 0;
 }

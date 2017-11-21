@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-using namespace std;
+
 
 class Rhomb
 {
@@ -16,12 +16,15 @@ public:
 	Rhomb();
 	Rhomb(int, int, int, int);
 	~Rhomb();
-	void saveToFile(string);
-	void readFromFile(string);
+	void saveToFile(std::ofstream&);
+	void readFromFile(std::ifstream&);
 	void setPoints(int, int, int, int);
 	void isRhombInside(Rhomb*);
 	void shiftRhomb(int, int);
 	POINT* getPoints();
+	friend class Draw;
 	friend class Queue;
+	friend std::ofstream& operator << (std::ofstream& out, const Queue& queue);
+	friend std::istream& operator >> (std::istream& in, Queue& queue);
 };
 

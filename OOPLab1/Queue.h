@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string.h>
 #include "Rhomb.h"
-using namespace std;
+
 
 class Queue
 {
@@ -20,10 +20,10 @@ public:
 	Rhomb* dequeue();
 	void showQueue();
 	const Rhomb* find(int, int, int, int);
-	void saveQueueToFile(ofstream&);
-	void loadQueueFromFile(ifstream&);
 	void setMaxSize(int);
-	void operator <<(ofstream&); //Перегрузка оператора cout 
-	void operator >> (istream&); //Перегрузка оператора cin
+	friend std::ofstream& operator << (std::ofstream& out, const Queue& queue);
+	friend std::istream& operator >>(std::istream& in, Queue& queue);
+
+	//ofstream& operator << (ofstream&);
 };
 

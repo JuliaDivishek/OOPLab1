@@ -2,6 +2,7 @@
 
 void clearTheScreen(HWND hwnd)
 {
+	system("pause");
 	InvalidateRect(hwnd, 0, TRUE);
 	UpdateWindow(hwnd);
 }

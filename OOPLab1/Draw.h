@@ -8,8 +8,6 @@
 #include "Rhomb.h"
 
 
-using namespace std;
-
 class Draw
 {
 	HWND hwnd;
@@ -29,8 +27,8 @@ public:
 	void drawRhomb(Rhomb*);
 	void drawFilledRhomb(Rhomb*);
 	void drawRhombInRhomb(Rhomb*, Rhomb*);
-	void saveColorsToFile(string);
-	void readColorsFromFile(string);
+	void saveColorsToFile(std::ofstream&);
+	void readColorsFromFile(std::ifstream&);
 	void setOutlineColor(short, short, short);
 	void setFillerColor(short, short, short);
 	
