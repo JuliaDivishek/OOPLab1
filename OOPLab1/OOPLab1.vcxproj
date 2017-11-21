@@ -145,12 +145,14 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="DrawHelpers.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Rhomb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="DrawHelpers.cpp" />
     <ClCompile Include="example.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Rhomb.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
