@@ -25,6 +25,6 @@ public:
 	friend class Draw;
 	friend class Queue;
 	friend std::ofstream& operator << (std::ofstream& out, const Queue& queue);
-	friend std::istream& operator >> (std::istream& in, Queue& queue);
+	friend std::ifstream& operator >> (std::ifstream& in, Queue& queue);
 };
 

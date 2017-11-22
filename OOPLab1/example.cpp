@@ -51,7 +51,7 @@ int main()
 		}
 
 		std::ofstream queueOut("queue.txt", std::ios::out);
-		//out<<queue;
+		//queueOut<<queue;
 		queueOut.close();
 
 		Rhomb *d = queue.dequeue();

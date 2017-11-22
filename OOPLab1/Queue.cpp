@@ -118,11 +118,10 @@ std::ifstream& operator >> (std::ifstream& in, Queue& queue)
 			return in;
 			}
 	else std::exception("The stream is not open");
-
 }
 
 
-//Вот так получается, но писать тогда нужно наоборот queue<<out
+//       Вот так получается, но писать тогда нужно наоборот queue<<out
 /*ofstream& Queue::operator<<(ofstream& out)
 {
 	if (out.is_open())
