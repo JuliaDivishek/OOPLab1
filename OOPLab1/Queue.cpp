@@ -28,14 +28,11 @@ Rhomb* Queue::dequeue()
 	
 	Rhomb *a = array[0]; //взяли из очереди элемент
 	
-	//передвигаем очередь. В с++ нет аналога realloc, поэтому так
-	Rhomb **newArray = new Rhomb*[maxSize_];
-	for (int i = 0; i < rear; i++)
+	//передвигаем очередь
+	for (int i = 0; i <= rear; i++)
 	{
-		newArray[i] = array[i+1];
+		array[i] = array[i + 1];
 	}
-	delete[] array;
-	array = newArray;
 	rear--;
 
 	return a;
@@ -78,17 +75,17 @@ std::ofstream& operator<<(std::ofstream& out, const Queue& queue)
 {
 	if (out.is_open())
 	{
-		out << queue.maxSize_ << " ";
-		out << queue.rear << " ";
+		out.operator<<(queue.maxSize_) << " ";
+		out.operator<< (queue.rear)<< " ";
 		for (int i = 0; i <= queue.rear; i++)
 		{
-			out << queue.array[i]->points[0].x;
+			out.operator<<(queue.array[i]->points[0].x);
 			out << " ";
-			out << queue.array[i]->points[0].y;
+			out.operator<<(queue.array[i]->points[0].y);
 			out << " ";
-			out << queue.array[i]->points[1].x;
+			out.operator<<(queue.array[i]->points[1].x);
 			out << " ";
-			out << queue.array[i]->points[1].y;
+			out.operator<<(queue.array[i]->points[1].y);
 			out << " ";
 		}
 		return out;
@@ -120,26 +117,3 @@ std::ifstream& operator >> (std::ifstream& in, Queue& queue)
 	else std::exception("The stream is not open");
 }
 
-
-//       Вот так получается, но писать тогда нужно наоборот queue<<out
-/*ofstream& Queue::operator<<(ofstream& out)
-{
-	if (out.is_open())
-	{
-		out << this->maxSize_ << " ";
-		out << this->rear << " ";
-		for (int i = 0; i <= this->rear; i++)
-		{
-			out << array[i]->points[0].x;
-			out << " ";
-			out << array[i]->points[0].y;
-			out << " ";
-			out << array[i]->points[1].x;
-			out << " ";
-			out << array[i]->points[1].y;
-			out << " ";
-		}
-		return out;
-	}
-	else exception("The stream is not open");
-}*/

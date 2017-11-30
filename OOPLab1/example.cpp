@@ -46,21 +46,27 @@ int main()
 
 		for(int i = 0; i < n; i++)
 		{ 
-			Rhomb* rhomb = new Rhomb(50+i, 50+i, 100+i, 20+i);
+			Rhomb* rhomb = new Rhomb(50+50*i, 50+50*i, 100+50*i, 20+50*i);
 			queue.enqueue(rhomb);
 		}
 
 		std::ofstream queueOut("queue.txt", std::ios::out);
-		//queueOut<<queue;
+		queueOut<<queue;
 		queueOut.close();
 
-		Rhomb *d = queue.dequeue();
 		queue.showQueue();
+
+		for (int i = 0; i < n; i++)
+		{
+			Rhomb *d = queue.dequeue();
+			c.drawRhomb(d);
+		}
+
 		std::cout << queue.find(51, 51, 101, 21) << std::endl;
 
 	
 		std::ifstream queueIn("queue.txt", std::ios::in);
-		//queueIn >> queue;
+		queueIn >> queue;
 		queue.showQueue();
 		queueIn.close();
 	}

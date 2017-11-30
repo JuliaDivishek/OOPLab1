@@ -2,7 +2,6 @@
 #include <windows.h>
 #include <windowsx.h>
 #include <iostream>
-#include <fstream>
 #include <string.h>
 #include "Rhomb.h"
 
@@ -23,7 +22,5 @@ public:
 	void setMaxSize(int);
 	friend std::ofstream& operator << (std::ofstream& out, const Queue& queue);
 	friend std::ifstream& operator >>(std::ifstream& in, Queue& queue);
-
-	//ofstream& operator << (ofstream&);
 };
 

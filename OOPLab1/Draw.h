@@ -2,7 +2,6 @@
 #include <windows.h>
 #include <windowsx.h>
 #include <iostream>
-#include <fstream>
 #include <string.h>
 #include "Color.h"
 #include "Rhomb.h"
