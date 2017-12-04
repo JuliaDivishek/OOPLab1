@@ -41,6 +41,8 @@ int main()
 		e.shiftShape(50, 50);
 		e.draw(hwnd, hdc);
 		in.close();
+
+		ReleaseDC(hwnd, hdc);
 	}
 	catch (std::exception ex)
 	{

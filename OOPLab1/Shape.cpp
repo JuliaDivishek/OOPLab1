@@ -1,4 +1,4 @@
-#include "Shape.h"
+п»ї#include "Shape.h"
 
 Contour::Contour(color outline)
 {
@@ -242,7 +242,7 @@ void CombinedFilledRhomb::isRhombInside()
 {
 	POINT *points1 = this->getPoints();
 	POINT *points2 = innerRhomb->getPoints();
-	//при проверке используется запас в 15 пикселей, чтобы при отрисовке фигура внутри фигуры смотрелась красиво
+	//РїСЂРё РїСЂРѕРІРµСЂРєРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Р·Р°РїР°СЃ РІ 15 РїРёРєСЃРµР»РµР№, С‡С‚РѕР±С‹ РїСЂРё РѕС‚СЂРёСЃРѕРІРєРµ С„РёРіСѓСЂР° РІРЅСѓС‚СЂРё С„РёРіСѓСЂС‹ СЃРјРѕС‚СЂРµР»Р°СЃСЊ РєСЂР°СЃРёРІРѕ
 	if ((points2[0].x < points1[0].x + 15) || (points2[2].x > points1[2].x - 15) || (points2[1].y < points1[1].y + 15) || (points2[3].y > points1[3].y - 15))
 		throw std::exception("Incorrect points of innerRhomb");
 }
@@ -264,9 +264,9 @@ void CombinedFilledRhomb::draw(HWND hwnd, HDC hdc)
 	SelectBrush(hdc, GetStockBrush(NULL_BRUSH));
 	Polygon(hdc, this->points, 4);
 	Polygon(hdc, this->innerRhomb->getPoints(), 4);
-	//Меняем цвет кисти
+	//РњРµРЅСЏРµРј С†РІРµС‚ РєРёСЃС‚Рё
 	SelectBrush(hdc, this->filled->getHbrush());
-	//делаем заливку, указываем точку, гарантированно лежащую внутри фигуры
+	//РґРµР»Р°РµРј Р·Р°Р»РёРІРєСѓ, СѓРєР°Р·С‹РІР°РµРј С‚РѕС‡РєСѓ, РіР°СЂР°РЅС‚РёСЂРѕРІР°РЅРЅРѕ Р»РµР¶Р°С‰СѓСЋ РІРЅСѓС‚СЂРё С„РёРіСѓСЂС‹
 	FloodFill(hdc, this->points[0].x + 1, this->points[0].y, RGB(this->filled->getOutlineColor().R, this->filled->getOutlineColor().G, this->filled->getOutlineColor().B));
 }
 

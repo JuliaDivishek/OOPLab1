@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 #include <windows.h>
 #include <windowsx.h>
@@ -22,8 +22,8 @@ public:
 class Contour
 {
 protected:
-	color outline; //цвет контура
-	HPEN hPen; //перо
+	color outline; //С†РІРµС‚ РєРѕРЅС‚СѓСЂР°
+	HPEN hPen; //РїРµСЂРѕ
 
 	void checkColor(short, short, short);
 	
@@ -31,7 +31,6 @@ public:
 	Contour(color);
 	HPEN getHpen();
 	color getOutlineColor();
-
 	void saveToFile(std::ofstream&);
 	void readFromFile(std::ifstream&);
 	void setColor(short, short, short);
@@ -40,8 +39,8 @@ public:
 
 class Filled: public Contour
 {
-	color filler; //цвет заливки
-	HBRUSH hBrush; //кисть
+	color filler; //С†РІРµС‚ Р·Р°Р»РёРІРєРё
+	HBRUSH hBrush; //РєРёСЃС‚СЊ
 
 public:
 	Filled(color, color);
@@ -57,7 +56,7 @@ class Rhomb: public Shape
 {
 protected:
 	Contour *contour;
-	POINT *points; //вершины
+	POINT *points; //РІРµСЂС€РёРЅС‹
 	void checkPoints(int, int, int, int);
 
 public:
@@ -66,7 +65,7 @@ public:
 	void setPoints(int, int, int, int);
 	void shiftShape(int, int);
 	POINT* getPoints();
-	void draw(HWND hwnd, HDC hdc);
+	void draw(HWND, HDC);
 	void checkOutTheWindow(HWND hwnd);
 	void saveToFile(std::ofstream&);
 	void readFromFile(std::ifstream&);
